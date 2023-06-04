@@ -1,0 +1,18 @@
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+class AuthorCreate(CreateView, LoginRequiredMixin):
+    model = Recipe
+    fields = ['title', 'diet', 'cook_time', 'chef', 'directions', 'difficulty_level',
+              'ingredients', 'associated_recipe', 'origin']
+    template_name_suffix = '_create_new'
+
+recipe_create_new.html
+{% extends "base_generic.html" %}
+{% block content %}
+      <form action="" method="post">
+        {% csrf_token %}
+        <table>
+        {{ form.as_table }}
+        </table>
+        <input type="submit" value="Submit">
+      </form>
+{% endblock %}

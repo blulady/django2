@@ -1,0 +1,31 @@
+make sure you have moved the secret key out of the django settings.py into
+a .env file that you create in the same directory as settings.py
+you can use Django-Environ to relocate it
+activate you environment variable
+>pip install django-environ
+
+then import/initialise environ in settings.py
+import environ
+env = environ.Env()
+environ.Env.read_env()
+
+then create your .env file (same directory as settings.py)
+
+then declare your environment variables in .env
+-don't use quotations around the strings
+
+SECRET_KEY=h^z13$qr_s_wd65@gnj7a=xs7t05$w7q8!x_8zsld#
+
+DATABASE_NAME=postgresdatabase
+
+DATABASE_USER=alice
+
+DATABASE_PASS=supersecretpassword
+
+
+https://www.toptal.com/developers/gitignore <create a .gitignore for your file
+create a .gitignore file in the directory you initalize git in (make sure it has your .env and your virtual environment)
+(commit .gitignore every time you updage it)
+
+
+

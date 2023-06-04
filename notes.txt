@@ -1,0 +1,37 @@
+1. register a new app in settings.py
+2.application registry maintains metadata in an AppConfig instance for each installed application. 
+	this can be found in that application's app.py file
+	you add it to installed_apps in settings.py by the app_name.apps.App_nameConfig 
+	(as the class App_nameConfig is created by django using the App_name+Config in the apps.py folder in the app)
+
+2. change time_zone in settings.py to America/Los_Angeles
+3. add the app url pattern to the project.urls
+	 path('app_name/', include('app_name.urls'))
+4. enable the serving of static files during development by appending
+	urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+	Well the static function does not return a single url, so you can not add it as a single element to the list. By using +=, you actually append all the elements of the result of the static call to the list.
+	https://stackoverflow.com/questions/50274289/adding-static-to-urlpatterns-only-work-by-appending-to-the-list
+
+5. then create a urls in your app folder
+	from django.urls import path
+	from . import views
+
+6.then migrate to map defintions in the django code to the data structure used by the underlying database
+	python manage.py makemigrations #allows you to create but not apply the migrations for all apps or just a single app so you can make changes b4 migrating
+	python manage.py migrate #actually applys migrations
+
+7.add classes to your models to represent the data you'll be working with
+	each class is a table with attributes (fields models.CharField, models.DateField)
+	use fields to create relationships between the tables/classes (models.ForeignKey, models.ManyToManyField, models.UUIDField, models.OneToOne)
+	from django.urls import reverse # to use URLS like /myapplication/mymodelname/2 to display individual records for your model (where "2" is the id for a particular record), you will need to create a URL mapper to pass the response and id to a "model detail view"
+
+8.add models to the admin application to register them
+	then crete a superuser to create some data to test the views and templates
+	python3 manage.py createsuperuser
+	python3 manage.py runserver
+	in project/app/admin.py import your classes/tables from models
+	admin.site.register(Classes)
+
+	then you can log into the site & make some instances to play with
+
+9.
